@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    build: db/
+    container_name: db
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=db
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+
+  server:
+    build: server/
+    container_name: server
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    networks:
+      - mynetwork
+
+  client:
+    build: client/
+    container_name: client
+    depends_on:
+      - server
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
