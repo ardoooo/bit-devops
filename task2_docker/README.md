@@ -7,3 +7,6 @@
 ### Запуск
 - Поднимаем бд и сервер командой *docker-compose up --build --scale client=0*. Если у нас уже есть собранные контейнеры, то флаг *--build* можно убрать
 - Запускаем клиента командой *docker-compose run client*.
+
+### Docker registry
+Докер контейнер для сервера залил в регистр. Скачать можно командой *docker pull ardooo/text-storage-server*.
