@@ -1,0 +1,10 @@
+- name: Copy build artifacts
+  copy:
+    src: /build/
+    dest: /opt/fmt-app
+
+- name: Run application
+  shell: |
+    chmod +x /opt/fmt-app/echo
+    chmod +x /opt/fmt-app/start.sh
+    /opt/fmt-app/start.sh "123" 1 2 3

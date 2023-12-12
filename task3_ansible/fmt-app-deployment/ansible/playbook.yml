@@ -1,0 +1,9 @@
+- name: Build application
+  hosts: localhost
+  roles:
+    - builder
+
+- name: Deploy application
+  hosts: app_servers
+  roles:
+    - deployer

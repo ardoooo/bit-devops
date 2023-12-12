@@ -1,0 +1,21 @@
+- name: Ensure necessary host packages are installed
+  apt:
+    name: ['make', 'g++', 'libfmt-dev']
+    state: present
+
+- name: Clone application repository
+  git:
+    repo: https://github.com/ardoooo/fmt-example.git
+    dest: /tmp/fmt-app
+
+- name: Build application
+  command: make -C /tmp/fmt-app
+
+- name: Create build directory
+  file:
+    path: /build/
+    state: directory
+    mode: 0755
+
+- name: Copy build artifacts
+  command: cp /tmp/fmt-app/start.sh /tmp/fmt-app/echo /build/

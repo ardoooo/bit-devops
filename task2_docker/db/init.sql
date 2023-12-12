@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS storage (
+    id UUID PRIMARY KEY,
+    text_data TEXT NOT NULL
+);

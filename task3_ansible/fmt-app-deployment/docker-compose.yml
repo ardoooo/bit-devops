@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: docker/app-builder/Dockerfile
+    depends_on:
+      - app-server-1
+      - app-server-2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./ansible:/ansible
+
+  app-server-1:
+    build:
+      context: .
+      dockerfile: docker/app-server/Dockerfile
+    ports:
+      - '80:80'
+
+  app-server-2:
+    build:
+      context: .
+      dockerfile: docker/app-server/Dockerfile
+    ports:
+      - '8080:80'
+
+networks:
+  mynetwork:
